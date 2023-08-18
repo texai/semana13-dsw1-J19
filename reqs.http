@@ -1,4 +1,4 @@
-@server = https://glowing-couscous-j4q5xwwpw257g5-8080.app.github.dev
+@server = https://fictional-couscous-vgqvx74v6cv76-8080.app.github.dev
 ###
 GET {{server}}/api/instrumentos/2
 ###
