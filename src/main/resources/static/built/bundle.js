@@ -40845,6 +40845,7 @@ var VerInstrumentoPage = __webpack_require__(/*! ./pages/ver-instrumento */ "./s
 var NuevoInstrumentoPage = __webpack_require__(/*! ./pages/nuevo-instrumento */ "./src/main/js/pages/nuevo-instrumento.js");
 var VerMusicoPage = __webpack_require__(/*! ./pages/ver-musico */ "./src/main/js/pages/ver-musico.js");
 var EditarInstrumentoPage = __webpack_require__(/*! ./pages/editar-instrumento */ "./src/main/js/pages/editar-instrumento.js");
+var VerBandaPage = __webpack_require__(/*! ./pages/ver-banda */ "./src/main/js/pages/ver-banda.js");
 var router = createBrowserRouter([{
   path: '/',
   element: /*#__PURE__*/React.createElement(HomePage, null)
@@ -40863,6 +40864,9 @@ var router = createBrowserRouter([{
 }, {
   path: '/editar-instrumento/:id',
   element: /*#__PURE__*/React.createElement(EditarInstrumentoPage, null)
+}, {
+  path: '/ver-banda/:id',
+  element: /*#__PURE__*/React.createElement(VerBandaPage, null)
 }]);
 ReactDOM.render( /*#__PURE__*/React.createElement(React.StrictMode, null, /*#__PURE__*/React.createElement(RouterProvider, {
   router: router
@@ -41028,7 +41032,8 @@ var HomePage = /*#__PURE__*/function (_React$Component) {
     _this = _super.call(this, props);
     _this.state = {
       instrumentos: [],
-      musicos: []
+      musicos: [],
+      bandas: []
     };
     return _this;
   }
@@ -41052,25 +41057,57 @@ var HomePage = /*#__PURE__*/function (_React$Component) {
           musicos: response.entity._embedded.musicos
         });
       });
+      client({
+        method: 'GET',
+        path: '/api/bandas'
+      }).done(function (response) {
+        _this2.setState({
+          bandas: response.entity._embedded.bandas
+        });
+      });
     }
   }, {
     key: "render",
     value: function render() {
-      return /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement("h1", null, "Semana 12 App (componente: HomePage)"), /*#__PURE__*/React.createElement(Titulo, {
+      return /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement("h1", null, "Semana 13 App"), /*#__PURE__*/React.createElement("div", {
+        style: {
+          "width": "100%",
+          "display": "flex"
+        }
+      }, /*#__PURE__*/React.createElement("div", {
+        style: {
+          "width": "calc(100% / 3)"
+        }
+      }, /*#__PURE__*/React.createElement(Titulo, {
         entidad: "Intrumentos",
         emoji: "\uD83C\uDFB8"
       }), /*#__PURE__*/React.createElement(InstrumentoList, {
         instrumentos: this.state.instrumentos
       }), /*#__PURE__*/React.createElement(Link, {
         to: "/nuevo-instrumento"
-      }, "Nuevo Instrumento"), /*#__PURE__*/React.createElement(Titulo, {
+      }, "Nuevo Instrumento")), /*#__PURE__*/React.createElement("div", {
+        style: {
+          "width": "calc(100% / 3)"
+        }
+      }, /*#__PURE__*/React.createElement(Titulo, {
         entidad: "Musicos",
         emoji: "\uD83C\uDFB6"
       }), /*#__PURE__*/React.createElement(MusicoList, {
         musicos: this.state.musicos
       }), /*#__PURE__*/React.createElement(Link, {
         to: "/nuevo-musico"
-      }, "Nuevo M\xFAsico"));
+      }, "Nuevo M\xFAsico")), /*#__PURE__*/React.createElement("div", {
+        style: {
+          "width": "calc(100% / 3)"
+        }
+      }, /*#__PURE__*/React.createElement(Titulo, {
+        entidad: "Bandas",
+        emoji: "\uD83D\uDC69\uD83C\uDFFC\u200D\uD83C\uDFA4"
+      }), /*#__PURE__*/React.createElement(BandaList, {
+        bandas: this.state.bandas
+      }), /*#__PURE__*/React.createElement(Link, {
+        to: "/nueva-banda"
+      }, "Nueva Banda"))));
     }
   }]);
   return HomePage;
@@ -41124,12 +41161,35 @@ var MusicoList = /*#__PURE__*/function (_React$Component3) {
   }]);
   return MusicoList;
 }(React.Component);
-var Instrumento = /*#__PURE__*/function (_React$Component4) {
-  _inherits(Instrumento, _React$Component4);
-  var _super4 = _createSuper(Instrumento);
+var BandaList = /*#__PURE__*/function (_React$Component4) {
+  _inherits(BandaList, _React$Component4);
+  var _super4 = _createSuper(BandaList);
+  function BandaList() {
+    _classCallCheck(this, BandaList);
+    return _super4.apply(this, arguments);
+  }
+  _createClass(BandaList, [{
+    key: "render",
+    value: function render() {
+      var bandas = this.props.bandas.map(function (banda) {
+        return /*#__PURE__*/React.createElement(Banda, {
+          key: banda._links.self.href,
+          banda: banda
+        });
+      });
+      return /*#__PURE__*/React.createElement("table", {
+        border: "1"
+      }, /*#__PURE__*/React.createElement("tbody", null, /*#__PURE__*/React.createElement("tr", null, /*#__PURE__*/React.createElement("th", null, "Nombre"), /*#__PURE__*/React.createElement("th", null, "Acciones")), bandas));
+    }
+  }]);
+  return BandaList;
+}(React.Component);
+var Instrumento = /*#__PURE__*/function (_React$Component5) {
+  _inherits(Instrumento, _React$Component5);
+  var _super5 = _createSuper(Instrumento);
   function Instrumento() {
     _classCallCheck(this, Instrumento);
-    return _super4.apply(this, arguments);
+    return _super5.apply(this, arguments);
   }
   _createClass(Instrumento, [{
     key: "render",
@@ -41144,12 +41204,12 @@ var Instrumento = /*#__PURE__*/function (_React$Component4) {
   }]);
   return Instrumento;
 }(React.Component);
-var Musico = /*#__PURE__*/function (_React$Component5) {
-  _inherits(Musico, _React$Component5);
-  var _super5 = _createSuper(Musico);
+var Musico = /*#__PURE__*/function (_React$Component6) {
+  _inherits(Musico, _React$Component6);
+  var _super6 = _createSuper(Musico);
   function Musico() {
     _classCallCheck(this, Musico);
-    return _super5.apply(this, arguments);
+    return _super6.apply(this, arguments);
   }
   _createClass(Musico, [{
     key: "render",
@@ -41161,6 +41221,24 @@ var Musico = /*#__PURE__*/function (_React$Component5) {
     }
   }]);
   return Musico;
+}(React.Component);
+var Banda = /*#__PURE__*/function (_React$Component7) {
+  _inherits(Banda, _React$Component7);
+  var _super7 = _createSuper(Banda);
+  function Banda() {
+    _classCallCheck(this, Banda);
+    return _super7.apply(this, arguments);
+  }
+  _createClass(Banda, [{
+    key: "render",
+    value: function render() {
+      var id = this.props.banda._links.self.href.split("/").slice(-1);
+      return /*#__PURE__*/React.createElement("tr", null, /*#__PURE__*/React.createElement("td", null, this.props.banda.nombre), /*#__PURE__*/React.createElement("td", null, /*#__PURE__*/React.createElement(Link, {
+        to: "/ver-banda/" + id
+      }, "Ver")));
+    }
+  }]);
+  return Banda;
 }(React.Component);
 module.exports = HomePage;
 
@@ -41305,6 +41383,50 @@ var NuevoMusicoPage = function NuevoMusicoPage() {
   }, "Volver"));
 };
 module.exports = NuevoMusicoPage;
+
+/***/ }),
+
+/***/ "./src/main/js/pages/ver-banda.js":
+/*!****************************************!*\
+  !*** ./src/main/js/pages/ver-banda.js ***!
+  \****************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
+function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
+function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
+function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) arr2[i] = arr[i]; return arr2; }
+function _iterableToArrayLimit(arr, i) { var _i = null == arr ? null : "undefined" != typeof Symbol && arr[Symbol.iterator] || arr["@@iterator"]; if (null != _i) { var _s, _e, _x, _r, _arr = [], _n = !0, _d = !1; try { if (_x = (_i = _i.call(arr)).next, 0 === i) { if (Object(_i) !== _i) return; _n = !1; } else for (; !(_n = (_s = _x.call(_i)).done) && (_arr.push(_s.value), _arr.length !== i); _n = !0); } catch (err) { _d = !0, _e = err; } finally { try { if (!_n && null != _i["return"] && (_r = _i["return"](), Object(_r) !== _r)) return; } finally { if (_d) throw _e; } } return _arr; } }
+function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
+var React = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+var _require = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/dist/index.js"),
+  Link = _require.Link,
+  useParams = _require.useParams;
+var _require2 = __webpack_require__(/*! react */ "./node_modules/react/index.js"),
+  useState = _require2.useState,
+  useEffect = _require2.useEffect;
+var client = __webpack_require__(/*! ../client */ "./src/main/js/client.js");
+var VerBandaPage = function VerBandaPage() {
+  var _useParams = useParams(),
+    id = _useParams.id;
+  var _useState = useState({}),
+    _useState2 = _slicedToArray(_useState, 2),
+    banda = _useState2[0],
+    setBanda = _useState2[1];
+  useEffect(function () {
+    client({
+      method: 'GET',
+      path: '/api/bandas/' + id
+    }).done(function (response) {
+      return setBanda(response.entity);
+    });
+  }, []);
+  return /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement("h1", null, "Ver Banda"), /*#__PURE__*/React.createElement("table", null, /*#__PURE__*/React.createElement("tr", null, /*#__PURE__*/React.createElement("th", null, "Nombre"), /*#__PURE__*/React.createElement("td", null, banda.nombre))), /*#__PURE__*/React.createElement(Link, {
+    to: "/"
+  }, "Volver"));
+};
+module.exports = VerBandaPage;
 
 /***/ }),
 
