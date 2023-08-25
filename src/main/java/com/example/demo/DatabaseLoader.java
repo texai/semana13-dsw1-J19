@@ -7,16 +7,16 @@ import org.springframework.stereotype.Component;
 @Component
 public class DatabaseLoader implements CommandLineRunner {
 
-	private final InstrumentoRepository repositoryI;
-	private final MusicoRepository repositoryM;
-	private final BandaRepository repositoryB;
+	private final CursoRepository repositoryI;
+	private final AlumnoRepository repositoryM;
+	private final ColegioRepository repositoryB;
 	private final IntegranteRepository repositoryN;
 
 	@Autowired
 	public DatabaseLoader(
-		InstrumentoRepository repositoryI,
-		MusicoRepository repositoryM,
-		BandaRepository repositoryB,
+		CursoRepository repositoryI,
+		AlumnoRepository repositoryM,
+		ColegioRepository repositoryB,
 		IntegranteRepository repositoryN
 		) {
 		this.repositoryI = repositoryI;
@@ -28,26 +28,26 @@ public class DatabaseLoader implements CommandLineRunner {
 	@Override
 	public void run(String... strings) throws Exception {
 
-		this.repositoryI.save(new Instrumento("Guitarra", "Cuerda", "de madera, con caja de resonancia, 6 cuerdas templadas"));
-		this.repositoryI.save(new Instrumento("Ukelele","Cuerda","de madera, con caja de resonancia pequeña, 4 cuerdas templadas"));
-		this.repositoryI.save(new Instrumento("Melódica","Viento","teclado pequeño de 2 octavas, sonorizado por soplido"));
-		Instrumento iVoz = new Instrumento("Voz","Viento",".");
+		this.repositoryI.save(new Curso("Comunicacion", "letras", "aprendemos textos y el manejo de la comunicacion"));
+		this.repositoryI.save(new Curso("Matematica","Numeros","apredemas numeros y enteractuar con nosotros mismos"));
+		this.repositoryI.save(new Curso("Religon","Fe","Reza para que pases el curso"));
+		Curso iVoz = new Curso("Voz","Viento de la Fe",".");
 		this.repositoryI.save(iVoz);
-		Instrumento iGuitarraElectrica = new Instrumento("Guitarra Electrica","Electrónico", ".");
-		this.repositoryI.save(iGuitarraElectrica);
-		this.repositoryI.save(new Instrumento("Batería","Percusión","."));
+		Curso iReligionLaFe = new Curso("Viento de la Fe","fe", ".");
+		this.repositoryI.save(iReligionLaFe);
+		this.repositoryI.save(new Curso("RRHH","LA LEY DE LEYES","."));
 
-		this.repositoryM.save(new Musico("Daniel F"));
-		Musico mFreddy = new Musico("Freddy");
-		this.repositoryM.save(mFreddy);
-		Musico mBrian = new Musico("Brian");
-		this.repositoryM.save(mBrian);
+		this.repositoryM.save(new Alumno("Miguel a"));
+		Alumno DLucas = new Alumno("Lucas");
+		this.repositoryM.save(DLucas);
+		Alumno FGorgue = new Alumno("Gorgue");
+		this.repositoryM.save(FGorgue);
 
-		Banda bQueen = new Banda("Queen");
-		this.repositoryB.save(bQueen);
+		Colegio fSteve = new Colegio("Steve");
+		this.repositoryB.save(fSteve);
 
-		this.repositoryN.save(new Integrante(bQueen, mFreddy, iVoz));
-		this.repositoryN.save(new Integrante(bQueen, mBrian, iGuitarraElectrica));
+		this.repositoryN.save(new Integrante(fSteve, DLucas, iVoz));
+		this.repositoryN.save(new Integrante(fSteve, FGorgue, iReligionLaFe));
 
 
 	}

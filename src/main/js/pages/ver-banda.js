@@ -3,45 +3,45 @@ const { Link, useParams } = require('react-router-dom');
 const { useState, useEffect } = require('react');
 const client = require('../client');
 
-const VerBandaPage = () => {
+const VerColegioPage = () => {
 
     let { id } = useParams();
-    const [banda, setBanda] = useState({});
+    const [colegio, setColegio] = useState({});
     const [integrantes, setIntegrantes] = useState([]);
 
     useEffect(() => {
         client({
             method: 'GET',
-            path: '/api/bandas/' + id
-        }).done(response => setBanda(response.entity))
+            path: '/api/colegios/' + id
+        }).done(response => setColegio(response.entity))
         client({
             method: 'GET',
-            path: '/api/bandas/' + id + '/formacion'
+            path: '/api/colegios/' + id + '/formacion'
         }).done(response => setIntegrantes(response.entity))
     }, [])
 
 
     return (
         <>
-            <h1>Ver Banda</h1>
+            <h1>Ver Colegio</h1>
             <hr />
 
             <table border="1">
                 <tbody>
                     <tr>
                         <th>Nombre</th>
-                        <td>{banda.nombre}</td>
+                        <td>{colegio.nombre}</td>
                     </tr>
                 </tbody>
             </table>
             <hr />
 
-            <h2>Formación</h2>
+            <h2>Informacion</h2>
             <table border="1">
                 <thead>
                     <tr>
-                        <th>Musico</th>
-                        <th>Instrumento</th>
+                        <th>Alumno</th>
+                        <th>Curso</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -60,11 +60,11 @@ const VerBandaPage = () => {
             </table>
 
             <hr />
-            <Link to={`/ver-banda/${id}/nuevo-integrante`}>Nuevo Integrante</Link> |
+            <Link to={`/ver-colegio/${id}/nuevo-integrante`}>Nuevo Integrante</Link> |
             <Link to="/">Volver</Link>
         </>
     )
 
 }
 
-module.exports = VerBandaPage;
+module.exports = VerColegioPage;

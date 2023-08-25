@@ -3,24 +3,46 @@ const ReactDOM = require('react-dom');
 const {createBrowserRouter, RouterProvider} = require('react-router-dom');
 
 const HomePage = require('./pages/home');
-const NuevoMusicoPage = require('./pages/nuevo-musico');
-const VerInstrumentoPage = require('./pages/ver-instrumento');
-const NuevoInstrumentoPage = require('./pages/nuevo-instrumento');
-const VerMusicoPage = require('./pages/ver-musico');
-const EditarInstrumentoPage = require('./pages/editar-instrumento');
-const VerBandaPage = require('./pages/ver-banda');
+
+// Alumnos
+const NuevoAlumnoPage = require('./pages/nuevo-alumno');
+const VerAlumnoPage = require('./pages/ver-alumno');
+
+// Cursos
+
+const VerCursoPage = require('./pages/ver-curso');
+const NuevoCursoPage = require('./pages/nuevo-curso');
+const EditarcursoPage = require('./pages/editar-curso');
+
+
+
+
+
+
+
+const VerBandaPage = require('./pages/ver-colegio');
 const NuevoIntegrantePage = require('./pages/nuevo-integrante');
 
 
 const router = createBrowserRouter([
 	{ path: '/', element: <HomePage /> },
-	{ path: '/ver-instrumento/:id', element: <VerInstrumentoPage /> },
-	{ path: '/nuevo-instrumento', element: <NuevoInstrumentoPage /> },
-	{ path: '/ver-musico/:id', element: <VerMusicoPage /> },
-	{ path: '/nuevo-musico', element: <NuevoMusicoPage /> },
-	{ path: '/editar-instrumento/:id', element: <EditarInstrumentoPage /> },
-	{ path: '/ver-banda/:id', element: <VerBandaPage /> },
-	{ path: '/ver-banda/:id/nuevo-integrante', element: <NuevoIntegrantePage /> },
+
+
+	{ path: '/ver-curso/:id', element: <VerCursoPage /> },
+	{ path: '/nuevo-curso', element: <NuevoCursoPage /> },
+	{ path: '/editar-curso/:id', element: <EditarcursoPage /> },
+
+	
+
+
+	{ path: '/ver-alumno/:id', element: <VerAlumnoPage /> },
+	{ path: '/nuevo-alumno', element: <NuevoAlumnoPage /> },
+
+
+
+	
+	{ path: '/ver-colegio/:id', element: <VerColegioPage /> },
+	{ path: '/ver-colegio/:id/nuevo-integrante', element: <NuevoIntegrantePage /> },
 
 
 ])

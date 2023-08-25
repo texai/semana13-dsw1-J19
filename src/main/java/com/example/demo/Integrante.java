@@ -12,23 +12,23 @@ public class Integrante {
     private @Id @GeneratedValue Long id;
 
     @ManyToOne()
-    @JoinColumn(name = "id_banda")
-    private Banda banda;
+    @JoinColumn(name = "id_colegio")
+    private Colegio colegio;
 
     @ManyToOne()
-    @JoinColumn(name = "id_musico")
-    private Musico musico;
+    @JoinColumn(name = "id_alumno")
+    private Alumno alumno;
 
     @ManyToOne()
-    @JoinColumn(name = "id_instrumento")
-    private Instrumento instrumento;
+    @JoinColumn(name = "id_curso")
+    private Curso curso;
 
     public Integrante() {}
 
-    public Integrante(Banda banda, Musico musico, Instrumento instrumento) {
-        this.banda = banda;
-        this.musico = musico;
-        this.instrumento = instrumento;
+    public Integrante(Colegio colegio, Alumno alumno, Curso curso) {
+        this.colegio = colegio;
+        this.alumno = alumno;
+        this.curso = curso;
     }
 
 	public Long getId() {
@@ -39,30 +39,31 @@ public class Integrante {
 		this.id = id;
 	}
 
-	public Banda getBanda() {
-		return banda;
+	public Colegio getColegio() {
+		return colegio;
 	}
 
-	public void setBanda(Banda banda) {
-		this.banda = banda;
+	public void setColegio(Colegio colegio) {
+		this.colegio = colegio;
 	}
 
-	public Musico getMusico() {
-		return musico;
+	public Alumno getAlumno() {
+		return alumno;
 	}
 
-	public void setMusico(Musico musico) {
-		this.musico = musico;
+	public void setAlumno(Alumno alumno) {
+		this.alumno = alumno;
 	}
 
-	public Instrumento getInstrumento() {
-		return instrumento;
+	public Curso getCurso() {
+		return curso;
 	}
 
-	public void setInstrumento(Instrumento instrumento) {
-		this.instrumento = instrumento;
+	public void setCurso(Curso curso) {
+		this.curso = curso;
 	}
 
+	
     
 
 }
