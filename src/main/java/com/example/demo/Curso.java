@@ -7,16 +7,16 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
 
 @Entity
-public class Instrumento {
+public class Curso {
 
 	private @Id @GeneratedValue Long id;
 	private String nombre;
 	private String categoria;
 	private String descripcion;
 
-	private Instrumento() {}
+	private Curso() {}
 
-	public Instrumento(String nombre, String categoria, String descripcion) {
+	public Curso(String nombre, String categoria, String descripcion) {
 		this.nombre = nombre;
 		this.categoria = categoria;
 		this.descripcion = descripcion;
@@ -28,11 +28,11 @@ public class Instrumento {
 	public boolean equals(Object o) {
 		if (this == o) return true;
 		if (o == null || getClass() != o.getClass()) return false;
-		Instrumento instrumento = (Instrumento) o;
-		return Objects.equals(id, instrumento.id) &&
-			Objects.equals(nombre, instrumento.nombre) &&
-			Objects.equals(categoria, instrumento.categoria) &&
-			Objects.equals(descripcion, instrumento.descripcion);
+		Curso curso = (Curso) o;
+		return Objects.equals(id, curso.id) &&
+			Objects.equals(nombre, curso.nombre) &&
+			Objects.equals(categoria, curso.categoria) &&
+			Objects.equals(descripcion, curso.descripcion);
 	}
 
 	@Override
@@ -44,7 +44,7 @@ public class Instrumento {
 
 	@Override
 	public String toString() {
-		return "Instrumento{" +
+		return "Curso{" +
 			"id=" + id +
 			", nombre='" + nombre + '\'' +
 			", categoria='" + categoria + '\'' +
